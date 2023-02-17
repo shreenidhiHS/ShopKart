@@ -3,13 +3,16 @@ import { AddCall } from '../../API/APICall';
 import { useForm } from "react-hook-form";
 import "./AddProduct.scss"
 import Navbar from '../Navbar/Navbar';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 function AddProduct() {
 
   const [data, setData] = useState({});
   const { register, handleSubmit } = useForm();
-  
+  const isLoggedIn = useSelector((state)=> state.auth.isLoggedIn)
+  console.log(isLoggedIn)
   const handleRegister = (Formdata) => {
     setData(Formdata)
     setDataToApi(Formdata)
@@ -28,7 +31,9 @@ function AddProduct() {
                 logout={true}
         
         />
-        <h1 className='from-head'>Add a new product</h1>
+        {isLoggedIn && (
+          <>
+            <h1 className='from-head'>Add a new product</h1>
         <div className='form'>
             <form  onSubmit={handleSubmit((data)=>{
               handleRegister(data)
@@ -61,8 +66,14 @@ function AddProduct() {
           />
           <button className="submitbtn" type="submit">Submit</button>
             </form>
-
         </div>
+          </>
+
+        )}
+        {!isLoggedIn && (
+          <Link to="/"><h1>Plase Login :)</h1></Link>
+        )}
+        
       
     </div>
   )

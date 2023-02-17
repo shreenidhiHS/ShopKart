@@ -5,15 +5,20 @@ import "./Login.scss"
 import { json } from 'react-router';
 import { useNavigate } from 'react-router';
 import Navbar from '../Navbar/Navbar';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../Store/AuthSlice';
 
 export default function Login() {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [verify , setVerify] = useState(true);
   const {register , handleSubmit} = useForm();
 
   function handleLogin(formdata){
     const localData = JSON.parse(localStorage.getItem("Id"));
+    dispatch(authActions.login())
+
     if(localData ==null)
       {
         setVerify(false)

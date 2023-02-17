@@ -4,30 +4,19 @@ import Card from "./Card"
 import { Link } from "react-router-dom"
 import "./Product.scss"
 import Navbar from "../Navbar/Navbar"
+import { useSelector } from "react-redux"
 
 
 export default function Product(props) {
 
-const [verify ,setVerify ] = useState(false);
+const isLoggedIn = useSelector((state)=> state.auth.isLoggedIn)
 
-useEffect(()=>{
-  verifyLog();
-})
 
-function verifyLog(){
-  if(localStorage.Id){
-    setVerify(true)
-  }
-  else
-  {
-    setVerify(false)
-  }
-}
 
   return (
     <div >
       
-      {verify ? (
+      {isLoggedIn ? (
         <>
           
           <Navbar display={true}

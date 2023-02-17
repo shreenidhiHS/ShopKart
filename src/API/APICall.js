@@ -26,10 +26,10 @@ export async function GetOne(id){
 }
 
 export async function AddCall(itemData) {
-    return  await axios({
+     return await axios({
       method: "POST",
-      url: url
-      
+      url: url,
+      payload:JSON.stringify(itemData)
     })
       .then((res) => {
         return res.data;
@@ -40,7 +40,8 @@ export async function AddCall(itemData) {
   export async function UpdateCall(id ,Data) {
     return  await axios({
       method: "PATCH",
-      url: "https://fakestoreapi.com/products/"+id
+      url: "https://fakestoreapi.com/products/"+id ,
+      payload:JSON.stringify(Data)
     })
       .then((res) => {
         return res.data;
