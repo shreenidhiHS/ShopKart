@@ -1,16 +1,23 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { useParams,useLocation } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import { UpdateCall } from '../../API/APICall';
+import { GetOne, UpdateCall } from '../../API/APICall';
 import Navbar from '../Navbar/Navbar';
 
-
-
 const UpdateProd = (props) => {
+
 const prod = useParams()
 const id = prod.id;
 
+const [formData , setFormData] = useState({});
 
+useEffect(()=>{
+  getFormData(id);
+})
+ async function getFormData(id){
+  const temp = await GetOne(id)
+  setFormData(temp)
+}
 
 const [data, setData] = useState(props.data);
   const { register, handleSubmit } = useForm();
@@ -25,7 +32,7 @@ const [data, setData] = useState(props.data);
     return setData(ProdData);
     
   }
-  console.log(data)
+  
 
   return (
     <div>
@@ -35,32 +42,39 @@ const [data, setData] = useState(props.data);
             <form onSubmit={handleSubmit((data) =>{
               handleRegister(data)
             })} >
+            <label className='form-label'>Title</label>
             <input className="p-name"
             type="text"
-            placeholder="title"
+            placeholder={formData.title}
             {...register("title",{required:"This is required"})}
           />
+          <label className='form-label'>Price</label>
           <input className="p-price"
             type="text"
             placeholder="price"
             
             {...register("price",{required:"This is required"})}
           />
-
+          <label className='form-label'>Image-URL</label>
           <input className="p-image"
             type="text"
             placeholder="image-url"
             label="Image"
+            
             {...register("image",{required:"This is required"})}
           />
+          <label className='form-label'>category</label>
           <input className="p-category"
             type="text"
-            placeholder="category"
+            
+            placeholder={formData.category}
             {...register("category",{required:"This is required"})}
           />
+          <label className='form-label'>DesCription</label>
            <input className="p-description"
             type="text"
-            placeholder="description"
+            
+            placeholder={formData.description}
             {...register("description",{required:"This is required"})}
           />
   

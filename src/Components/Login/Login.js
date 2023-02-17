@@ -17,8 +17,6 @@ export default function Login() {
 
   function handleLogin(formdata){
     const localData = JSON.parse(localStorage.getItem("Id"));
-    dispatch(authActions.login())
-
     if(localData ==null)
       {
         setVerify(false)
@@ -26,6 +24,7 @@ export default function Login() {
     else if(localData.email === formdata.email && localData.password === formdata.password)
     {
       setVerify(true)
+      dispatch(authActions.login())
       return navigate("/Product")
     }
     else{

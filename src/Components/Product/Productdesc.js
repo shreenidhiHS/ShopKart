@@ -7,6 +7,7 @@ import axios from 'axios'
 import { DeleteCall, GetOne } from '../../API/APICall'
 import RemoveProd from '../RemoveProduct/RemoveProd'
 import { Button } from 'primereact/button';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Productdesc = (props) => {
   const prod = useParams()
@@ -52,11 +53,9 @@ const Productdesc = (props) => {
     </div>
     <div className='op-btn'>
       <button className='btn-update' onClick={() =>handleUpdate(id)}>UPDATE</button>
-      <button label="Danger" severity="danger" className='btn-update' onClick={() =>handleRemove(id)}>REMOVE</button>
+      <DeleteIcon label="Danger" severity="danger" className='btn-update' onClick={() =>handleRemove(id)}>REMOVE</DeleteIcon>
       
     </div>
-    
-    <Button label="Danger" severity="danger" />
     </>
     )
 }
