@@ -32,8 +32,8 @@ export default function App() {
   const GetAllProduct = async ()=>{
     try {
       const prod =  await GetCall();
-     setProduct(prod)
-     setLoading(false)
+      setProduct(prod)
+      setLoading(false)
     } catch(e){
       console.log(e)
     }
