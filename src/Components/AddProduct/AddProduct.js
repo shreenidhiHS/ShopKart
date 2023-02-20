@@ -3,12 +3,15 @@ import { AddCall } from '../../API/APICall';
 import { useForm } from "react-hook-form";
 import "./AddProduct.scss"
 import Navbar from '../Navbar/Navbar';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { dataActions } from '../redux-store/DataSlice';
 
 
 function AddProduct() {
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState({});
   const [id, setId] = useState({});
   const [verify , setVerify] = useState(false);
@@ -17,19 +20,25 @@ function AddProduct() {
 
 
   const handleRegister = (Formdata) => {
-    setData(Formdata)
-    setDataToApi(Formdata)
+    setData(Formdata);
+    setDataToApi(Formdata);
+    dispatch(dataActions.addproduct(Formdata))
   }
 
    async function setDataToApi(Formdata) {
     const prodData = await AddCall(Formdata);
     setVerify(true)
-    return setId(prodData);
+    console.log(prodData.id);
+    
     
   }
+  if(verify)
+  {
+    return navigate("/product")
+  }
+
   
-    console.log(data)
-    console.log(id)
+  
   
   
 
@@ -40,9 +49,9 @@ function AddProduct() {
         
         />
         {isLoggedIn && (
-          <>
+          <div className='add-page'>
             <h1 className='from-head'>Add a new product</h1>
-        <div className='form'>
+            <div className='form'>
             <form  onSubmit={handleSubmit((data)=>{
               handleRegister(data)
             })}>
@@ -50,6 +59,12 @@ function AddProduct() {
             type="text"
             placeholder="title"
             {...register("title" , {required:"This is required"})}
+            
+          />
+          <input className="p-name"
+            type="text"
+            placeholder="id"
+            {...register("id" , {required:"This is required"})}
             
           />
           <input className="p-price"
@@ -79,10 +94,9 @@ function AddProduct() {
         {verify && 
           <>
           <p className='added-text'>{data.title} Added Successfully</p>
-          <Link to="/AddProduct"><p>Want to add another product ?</p></Link>
           </>
         }
-        </>
+        </div>
 
         )}
         {!isLoggedIn && (

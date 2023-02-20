@@ -3,7 +3,7 @@ import { Route,Link,Routes, useNavigate } from 'react-router-dom';
 import Contact from '../Contact/Contact.js'
 import "./Navbar.scss"
 import { useDispatch } from 'react-redux';
-import { authActions } from '../Store/AuthSlice.js';
+import { authActions } from '../redux-store/AuthSlice.js';
 import AddIcon from '@mui/icons-material/Add';
 import StoreIcon from '@mui/icons-material/Store';
 import ContactPageIcon from '@mui/icons-material/ContactPage';

@@ -13,7 +13,7 @@ function Card(props){
   return (
     <>
         <div key={props.data.id} onClick={() =>handleClick(props.data.id)} className="card">
-            <img src={props.data.image} alt="#"/>
+            <img src={props.data.image} alt="#" className='card-img'/>
             <div className="card-des">
                 <h2>{props.data.title}</h2>
                 <h2 className="price">Price: {props.data.price}</h2>

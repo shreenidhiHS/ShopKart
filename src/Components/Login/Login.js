@@ -6,22 +6,35 @@ import { json } from 'react-router';
 import { useNavigate } from 'react-router';
 import Navbar from '../Navbar/Navbar';
 import { useDispatch } from 'react-redux';
-import { authActions } from '../Store/AuthSlice';
+import { authActions } from '../redux-store/AuthSlice';
+import { dataActions } from '../redux-store/DataSlice';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 export default function Login() {
+
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [verify , setVerify] = useState(true);
   const {register , handleSubmit} = useForm();
 
+
+  //set API data to reducer
+  useEffect(() =>{
+    callApi();
+  },[]);
+
+  async function callApi(){
+    const response = await axios.get("https://fakestoreapi.com/products")
+    dispatch(dataActions.addData(response.data)); 
+  }
+
+  //handle login data
   function handleLogin(formdata){
     const localData = JSON.parse(localStorage.getItem("Id"));
-    if(localData ==null)
-      {
-        setVerify(false)
-      }
-    else if(localData.email === formdata.email && localData.password === formdata.password)
+
+    if(localData.email === formdata.email && localData.password === formdata.password)
     {
       setVerify(true)
       dispatch(authActions.login())
@@ -31,9 +44,13 @@ export default function Login() {
       setVerify(false)
     }
   }
+
+  //navigate signup if not a user
   function handlesign(){
     return navigate("/signup")
   }
+
+
 
   return (
     <>
@@ -59,7 +76,8 @@ export default function Login() {
           />
         <button className='login-btn' type='submit'>Login</button>
       </form>
-      {verify ? <p></p> : <p style={{color: "red"}}>Wrong ID or Password</p>}
+      
+      {!verify && <p style={{color: "red"}}>Wrong ID or Password</p>}
       <p className='link' onClick={handlesign}>Not a user ? Sign-up</p>
     </div>
     </>

@@ -1,3 +1,6 @@
+@import "../variable.scss";
+
+
 .login-form{
     display: flex;
     flex-direction: column;
@@ -11,11 +14,11 @@
 
     .login-head{
         font-size: 2.2rem;
-        color: white;
+        color: black;
     }
     .login-h2{
         font-size: 1.2rem;
-        color: white;
+        color: black;
     }
     .form-ele{
         display: flex;
@@ -32,6 +35,7 @@
     }
     .password{
         @extend .email
+
     }
     .login-btn{
         height: 40px;
@@ -39,6 +43,7 @@
         border-radius: 20px;
         border: white;
         margin-top: 30px;
+
 
     }
     .login-btn:hover{
@@ -48,7 +53,7 @@
 
     }
     .link{
-        color: white;
+        color: black;
         cursor: pointer;
         margin-top: 50px;
     }

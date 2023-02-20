@@ -1,4 +1,5 @@
 $primary-color: white;
+$secondary-color : black;
 
 
 .product{
@@ -33,7 +34,7 @@ $primary-color: white;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    box-shadow: 0px 5px 30px 1px black;
+    box-shadow: 0px 5px 30px 1px $secondary-color;
     border-radius: 20px 20px 20px 20px;
   
   }
@@ -45,22 +46,23 @@ $primary-color: white;
   .card>img{
     height: 400px;
     max-width: 300px;
+    
   }
   .price{
     font-size: 20px;
   }
 
   .product-desc{
-    margin: 0;
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 50vh;
     justify-content: space-between;
     align-items: center;
-    margin-top: 250px;
+    margin: 10px;
+    margin-top: 100px;
     background-color: $primary-color;
-    box-shadow: 0px 5px 30px 1px black;
+    box-shadow: 0px 0px 30px 1px $secondary-color;
     border-radius: 20px 20px 20px 20px;
 
     img{
@@ -91,7 +93,6 @@ $primary-color: white;
   .btn-update{
     padding: 10px;
     margin: 10px;
-    border: 2px;
     border-radius: 5px;
     background-color: $primary-color;
     color: rgb(45, 60, 87);
@@ -104,7 +105,7 @@ $primary-color: white;
 .Link-login{
   list-style: none;
   text-decoration: none;
-  color: white;
+  color: $primary-color;
   display: flex;
   justify-content: center;
   align-items: center;

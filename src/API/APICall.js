@@ -40,8 +40,8 @@ export async function AddCall(itemData) {
   export async function UpdateCall(id ,Data) {
     return  await axios({
       method: "PATCH",
-      url: "https://fakestoreapi.com/products/"+id ,
-      payload:JSON.stringify(Data)
+      url: "https://fakestoreapi.com/products/"+id
+      
     })
       .then((res) => {
         return res.data;

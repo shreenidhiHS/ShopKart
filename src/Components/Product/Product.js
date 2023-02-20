@@ -5,33 +5,28 @@ import { Link } from "react-router-dom"
 import "./Product.scss"
 import Navbar from "../Navbar/Navbar"
 import { useSelector } from "react-redux"
-import { set } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 
 export default function Product(props) {
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(!isLoggedIn){
+      return navigate("/")
+     }
+  },[])
+
+
 
 const isLoggedIn = useSelector((state)=> state.auth.isLoggedIn)
 
 
-const[verify , setVerify] = useState(false);
 
-useEffect(()=>{
-  getVerify();
-},[])
-function getVerify(){
-  if (localStorage.Id)
-  {
-    setVerify(true)
-  }
-  else{
-    setVerify(false)
-  }
-}
 
   return (
     <div >
       
-      {isLoggedIn ? (
+      {isLoggedIn && (
         <>
           
           <Navbar display={true}
@@ -49,10 +44,6 @@ function getVerify(){
           )))}
           </div>
         </> 
-      ):(
-        <div>
-          <Link to="/" className="Link-login"><p>please Login to use :)</p></Link>
-        </div>
       )}
     </div>
   )
